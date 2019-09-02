@@ -15,15 +15,16 @@ router.post('/login', function(req, res, next) {
     var email = (req.body.email)?req.body.email:'';
     var passwd = (req.body.password)?req.body.password:'';
 
-    console.log(req);
 
 
+    var query = {"email": email, "password": passwd};
+    console.log(query);
 
     var userModel = require('../models/users');
 
     if(email!=='' && passwd!=='') {
 
-        userModel.findOne({"email": email, "password": passwd}, function (err, data) {
+        userModel.findOne(query, function (err, data) {
             if (err) {
                 res.json({"error": "Error:" + err.toString()});
             }
